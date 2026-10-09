@@ -1,0 +1,8 @@
+{
+  "title": "CloudGoat: EC2 SSRF",
+  "description": "A CloudGoat scenario by Rhino Security Labs, deployed into your own AWS account: starting as the IAM user Solus, read a Lambda function's hardcoded secrets, exploit an SSRF in a web application on EC2 to take the instance's keys from the metadata service, then use keys found in a private S3 bucket to invoke the function.",
+  "question": "Starting as the IAM user Solus, invoke the scenario's Lambda function.",
+  "category": "MISC",
+  "difficulty": 2,
+  "evidence_kind": "SECRET"
+}

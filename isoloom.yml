@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://www.isoloom.com/schema/v1.json
+# CloudGoat's ec2_ssrf scenario by Rhino Security Labs
+# (https://github.com/RhinoSecurityLabs/cloudgoat), in your own AWS account.
+# Source in app/ (upstream, unchanged); terraform/ is this lab's wrapper around the scenario's own
+# terraform/ folder, feeding it what CloudGoat's CLI would.
+# Run: `aws login`, then `isoloom run cloud-services`; end it with `isoloom down cloud-services`.
+# Your public IP is the only address its instances accept: pass it on `run` (the placeholder
+# below refuses to deploy; `down` works without it):
+#   isoloom run cloud-services -s cloud.vars.whitelist=$(curl -s https://checkip.amazonaws.com)/32
+version: 1
+name: cloudgoat-ec2-ssrf
+
+cloud:
+  provider: aws
+  terraform: terraform
+  vars:
+    region: us-east-1
+    profile: default
+    whitelist: 0.0.0.0/32   # placeholder: set yours with -s (see above)
+  outputs:
+    access_key_id: access_key_id
+    secret_key: secret_key
+  hourly_usd: 0.02
+
+checks:
+  - name: the user Solus can sign in and the web application answers
+    script: checks/start.sh
+    wait: 600
+
+message: |
+  You are the IAM user Solus:
+    aws configure --profile solus   # access key {{ cloud.outputs.access_key_id }}
+                                    # secret key {{ cloud.outputs.secret_key }}
+  Goal: invoke the scenario's Lambda function. Cheat sheet:
+  app/cloudgoat/scenarios/aws/ec2_ssrf/cheat_sheet_solus.md

@@ -3,7 +3,9 @@
   "resolved_version": 1,
   "name": "cloudgoat-ec2-ssrf",
   "instance": null,
-  "inputs": [],
+  "inputs": [
+    "PLAYER_CIDR"
+  ],
   "networks": {},
   "reach": [],
   "machines": {},
@@ -64,7 +66,9 @@
       "access_key_id",
       "secret_key"
     ],
-    "inputs": [],
+    "inputs": [
+      "PLAYER_CIDR"
+    ],
     "hourly_usd": 0.02
   },
   "message": "You are the IAM user Solus:\n  aws configure --profile solus   # access key {{ cloud.outputs.access_key_id }}\n                                  # secret key {{ cloud.outputs.secret_key }}\nGoal: invoke the scenario's Lambda function. Cheat sheet:\napp/cloudgoat/scenarios/aws/ec2_ssrf/cheat_sheet_solus.md\n"

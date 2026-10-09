@@ -4,11 +4,12 @@
 # Source in app/ (upstream, unchanged); terraform/ is this lab's wrapper around the scenario's own
 # terraform/ folder, feeding it what CloudGoat's CLI would.
 # Run: `aws login`, then `isoloom run cloud-services`; end it with `isoloom down cloud-services`.
-# Your public IP is the only address its instances accept: pass it on `run` (the placeholder
-# below refuses to deploy; `down` works without it):
-#   isoloom run cloud-services -s cloud.vars.whitelist=$(curl -s https://checkip.amazonaws.com)/32
+# Your public IP is the only address its instances accept: the launch-time input PLAYER_CIDR
+# (`down` reuses the value `run` was given):
+#   PLAYER_CIDR=$(curl -s https://checkip.amazonaws.com)/32 isoloom run cloud-services
 version: 1
 name: cloudgoat-ec2-ssrf
+inputs: [PLAYER_CIDR]
 
 cloud:
   provider: aws
@@ -16,7 +17,7 @@ cloud:
   vars:
     region: us-east-1
     profile: default
-    whitelist: 0.0.0.0/32   # placeholder: set yours with -s (see above)
+    whitelist: "{{ inputs.PLAYER_CIDR }}"
   outputs:
     access_key_id: access_key_id
     secret_key: secret_key

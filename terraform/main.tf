@@ -36,7 +36,7 @@ resource "terraform_data" "whitelist_set" {
   lifecycle {
     precondition {
       condition     = can(cidrhost(var.whitelist, 0)) && var.whitelist != "0.0.0.0/32"
-      error_message = "Set your public IP: isoloom run cloud-services -s cloud.vars.whitelist=$(curl -s https://checkip.amazonaws.com)/32"
+      error_message = "Set your public IP: PLAYER_CIDR=$(curl -s https://checkip.amazonaws.com)/32 isoloom run cloud-services"
     }
   }
 }

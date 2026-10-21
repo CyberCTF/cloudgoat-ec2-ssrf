@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # The Isoloom release the lab is generated with.
-      - uses: isoloom/isoloom@v0.10.1
+      - uses: isoloom/isoloom@v1.0.1
       - run: isoloom validate
       - name: Generated files are current (run `isoloom generate` and commit)
         run: isoloom check
@@ -61,7 +61,7 @@ jobs:
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
-      - uses: isoloom/isoloom@v0.10.1
+      - uses: isoloom/isoloom@v1.0.1
       - name: Free disk space (some labs pull several GB of images)
         run: |
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL

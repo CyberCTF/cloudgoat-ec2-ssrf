@@ -49,4 +49,4 @@ jobs:
           client_secret: ${{ secrets.CYBERAUTH_CLIENT_SECRET }}
           backend_url: ${{ secrets.CYBERBACKEND_URL }}
           token_url: ${{ secrets.CYBERAUTH_TOKEN_URL }}
-            isothrum_version: "1.0.0"
+          isothrum_version: "1.0.0"

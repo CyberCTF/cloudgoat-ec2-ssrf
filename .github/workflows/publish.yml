@@ -39,7 +39,7 @@ jobs:
       - if: steps.gate.outputs.enabled == 'true'
         uses: actions/checkout@v4
       - if: steps.gate.outputs.enabled == 'true'
-        uses: isoloom/isoloom@v1.0.1
+        run: cargo install isoloom@1.0.1
       - if: steps.gate.outputs.enabled == 'true'
         run: isoloom generate
       - if: steps.gate.outputs.enabled == 'true'

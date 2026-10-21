@@ -52,7 +52,7 @@ data "external" "ssh_key" {
 }
 
 module "scenario" {
-  source          = "../app/cloudgoat/scenarios/aws/ec2_ssrf/terraform"
+  source          = "./scenario"
   profile         = var.profile
   region          = var.region
   cgid            = "ec2_ssrf_cgid${random_string.cgid.result}"
